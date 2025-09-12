@@ -1,0 +1,24 @@
+<div class="centered-container">
+  <h1>Tv Show Explorer</h1>
+  <div>
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        type="text"
+        [value]="searchText()"
+        (input)="searchText.set($event.target.value)"
+        (keyup)="onSearch()"
+        placeholder="Search TV shows"
+      />
+    </mat-form-field>
+    <button mat-icon-button color="primary" aria-label="Search" (click)="onSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  @if (searching()) {
+    <mat-progress-spinner mode="indeterminate" class="center-screen"></mat-progress-spinner>
+  }
+  @if (searchText().trim().length > 0 && searchResult().length > 0) {
+    <app-card [searchResult]="searchResult" [searchText]="searchText"></app-card>
+  }
+</div>

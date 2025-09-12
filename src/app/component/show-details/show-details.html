@@ -1,0 +1,37 @@
+@if (show()) {
+  <div class="show-details-main-layout">
+    <div class="show-details-container">
+      <div class="show-details-header">
+        <button mat-stroked-button color="primary" class="back-btn" (click)="goHome()">
+          &#8592; Back to Home
+        </button>
+        <div class="show-details-links">
+          <a class="details-link" href="#" (click)="$event.preventDefault(); onCastCrewClick()"
+            >Cast &amp; Crew</a
+          >
+          <a class="details-link" href="#" (click)="$event.preventDefault(); onEpisodesClick()"
+            >Episodes</a
+          >
+          <!-- <a class="details-link" href="#" (click)="$event.preventDefault(); onReviewClick()">Reviews</a> -->
+        </div>
+      </div>
+      <h2>{{ show().name }}</h2>
+      @if (show().image?.medium) {
+        <img [src]="show().image.medium" [alt]="show().name" />
+      }
+      <div class="show-meta">
+        <p><strong>Premiered:</strong> {{ show().premiered || 'Unknown' }}</p>
+        <p><strong>Genres:</strong> {{ show().genres?.join(', ') || 'N/A' }}</p>
+        <p><strong>Language:</strong> {{ show().language || 'N/A' }}</p>
+        <p><strong>Status:</strong> {{ show().status || 'N/A' }}</p>
+        <p><strong>Rating:</strong> {{ show().rating?.average || 'N/A' }}</p>
+      </div>
+      <div class="show-summary" [innerHTML]="show().summary"></div>
+    </div>
+    <div class="show-reviews-panel">
+      <app-reviews [showId]="show().id"></app-reviews>
+    </div>
+  </div>
+} @else {
+  <div>Loading...</div>
+}

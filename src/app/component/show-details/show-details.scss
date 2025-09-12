@@ -1,0 +1,47 @@
+.show-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.show-details-links {
+  display: flex;
+  gap: 24px;
+}
+
+.details-link {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.details-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+/////////
+///
+.show-details-main-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.show-details-container {
+  flex: 2;
+  padding-right: 24px;
+}
+
+.show-reviews-panel {
+  flex: 1;
+  min-width: 350px;
+  max-width: 400px;
+  background: #fafafa;
+  border-left: 1px solid #eee;
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}

@@ -1,0 +1,47 @@
+<div class="review-form">
+  <!-- <div class="cast-crew-header">
+        <button mat-stroked-button color="primary" class="back-btn" (click)="goShowDetails()">&#8592; Back to Details</button>
+</div> -->
+  <h3>Reviews</h3>
+  <form (submit)="submitReview($event)">
+    <mat-form-field appearance="fill">
+      <mat-label>Leave Rating</mat-label>
+      <mat-select [value]="rating()" (selectionChange)="rating.set($event.value)" required>
+        @for (r of [1, 2, 3, 4, 5]; track r) {
+          <mat-option [value]="r">{{ r }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <textarea
+        matInput
+        #commentInput
+        [value]="comment()"
+        (input)="comment.set(commentInput.value)"
+        required
+      ></textarea>
+    </mat-form-field>
+    <input type="hidden" [value]="showId" name="showId" />
+    <button mat-raised-button color="primary" type="submit" [disabled]="!rating() || !comment()">
+      @if (editingId()) {
+        Update Review
+      } @else {
+        Add Review
+      }
+    </button>
+  </form>
+</div>
+@if (reviews().length > 0) {
+  <div class="review-list">
+    <h3>User Reviews</h3>
+    @for (review of reviews(); track review.id) {
+      <mat-card>
+        <div><strong>Rating:</strong> {{ review.rating }}</div>
+        <div><strong>Comment:</strong> {{ review.comment }}</div>
+        <button mat-button color="primary" (click)="editReview(review)">Update</button>
+        <button mat-button color="warn" (click)="deleteReview(review.id)">Delete</button>
+      </mat-card>
+    }
+  </div>
+}
