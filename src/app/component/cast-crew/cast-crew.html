@@ -7,14 +7,14 @@
   <h2>Cast &amp; Crew for {{ showName() }}</h2>
   @if (cast().length > 0) {
     <div class="cast-card-grid">
-      @for (member of cast(); track member.person.id) {
+      @for (member of cast(); track member?.person?.id) {
         <mat-card class="cast-card">
-          @if (member.person.image?.medium) {
-            <img mat-card-image [src]="member.person.image.medium" [alt]="member.person.name" />
+          @if (member?.person?.image?.medium) {
+            <img mat-card-image [src]="member.person.image.medium" [alt]="member.person?.name" />
           }
           <mat-card-content>
-            <strong>{{ member.person.name }}</strong>
-            <div>as {{ member.character.name }}</div>
+            <strong>{{ member.person?.name }}</strong>
+            <div>as {{ member.character?.name }}</div>
           </mat-card-content>
         </mat-card>
       }

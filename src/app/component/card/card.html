@@ -1,13 +1,13 @@
-@if (searchResult().length > 0) {
+@if (searchResult() && searchResult().length > 0) {
   <div class="card-grid">
-    @for (item of searchResult(); track item.show.id) {
+    @for (item of searchResult(); track item?.show?.id) {
       <mat-card (click)="goToDetails(item.show.id)" class="tv-card">
         <mat-card-header>
-          <mat-card-title>{{ item.show.name }}</mat-card-title>
-          <mat-card-subtitle>{{ item.show.premiered || 'Unknown Year' }}</mat-card-subtitle>
+          <mat-card-title>{{ item.show?.name }}</mat-card-title>
+          <mat-card-subtitle>{{ item.show?.premiered || 'Unknown Year' }}</mat-card-subtitle>
         </mat-card-header>
-        @if (item.show.image?.medium) {
-          <img mat-card-image [src]="item.show.image.medium" [alt]="item.show.name" />
+        @if (item.show?.image?.medium) {
+          <img mat-card-image [src]="item.show.image.medium" [alt]="item.show?.name" />
         } @else {
           <img
             mat-card-image
@@ -16,8 +16,8 @@
           />
         }
         <mat-card-content>
-          <p><strong>Genres:</strong> {{ item.show.genres?.join(', ') || 'N/A' }}</p>
-          <p><strong>Language:</strong> {{ item.show.language || 'N/A' }}</p>
+          <p><strong>Genres:</strong> {{ item.show?.genres?.join(', ') || 'N/A' }}</p>
+          <p><strong>Language:</strong> {{ item.show?.language || 'N/A' }}</p>
         </mat-card-content>
       </mat-card>
     }

@@ -27,9 +27,11 @@ export class CastCrew {
           this.cast.set(data);
         });
         this.tvShowService.getShowDetails(this.id).subscribe((data) => {
-          if (data) {
-            this.showName.set(data.name);
-          }
+           if (data && data.name) {
+    this.showName.set(data.name);
+  } else {
+    this.showName.set('');
+  }
         });
       }
     });

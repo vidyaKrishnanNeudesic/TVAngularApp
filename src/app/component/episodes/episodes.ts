@@ -37,7 +37,11 @@ export class Episodes {
         });
 
         this.tvShowService.getShowDetails(this.showId).subscribe((data) => {
-          this.showName.set(data.name);
+          if (data && data.name) {
+    this.showName.set(data.name);
+  } else {
+    this.showName.set('');
+  }
         });
       }
     });

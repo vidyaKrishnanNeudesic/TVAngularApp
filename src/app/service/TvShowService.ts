@@ -11,15 +11,22 @@ export class TvShowService {
   constructor(private http: HttpClient) {}
 
   getShowDetails(showId: string): Observable<any> {
-    return this.http.get<any>(`${environment.apiBaseUrl}/shows/${showId}`).pipe(
-      catchError((error) => {
-        console.error(`Error fetching show details for ID ${showId}:`, error);
-        return of(null);
-      }),
-    );
+  if (showId === null || showId === undefined) {
+    return of(null);
   }
+  return this.http.get<any>(`${environment.apiBaseUrl}/shows/${showId}`).pipe(
+    catchError((error) => {
+      console.error(`Error fetching show details for ID ${showId}:`, error);
+      return of(null);
+    }),
+  );
+}
 
   getShowEpisodes(showId: string): Observable<any[]> {
+    if (showId === null || showId === undefined) {
+    return of([]);
+  }
+    
     return this.http.get<any[]>(`${environment.apiBaseUrl}/shows/${showId}/episodes`).pipe(
       catchError((error) => {
         console.error(`Error fetching episodes for ID ${showId}:`, error);
@@ -29,6 +36,9 @@ export class TvShowService {
   }
 
   searchShows(query: string): Observable<any[]> {
+    if (query === null || query === undefined) {
+    return of([]);
+  }
     return this.http
       .get<any[]>(`${environment.apiBaseUrl}/search/shows?q=${encodeURIComponent(query)}`)
       .pipe(
@@ -40,6 +50,9 @@ export class TvShowService {
   }
 
   getShowCasts(showId: string): Observable<any[]> {
+    if (showId === null || showId === undefined) {
+    return of([]);
+  }
     return this.http.get<any[]>(`${environment.apiBaseUrl}/shows/${showId}/cast`).pipe(
       catchError((error) => {
         console.error(`Error fetching casts of show for ID ${showId}:`, error);
