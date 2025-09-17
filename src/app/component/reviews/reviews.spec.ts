@@ -94,8 +94,6 @@ describe('Reviews', () => {
    // spyOn(uuidv4, 'apply').and.returnValue('uuid-mock');
     component.rating.set(4);
     component.comment.set('Nice show!');
-    component.reviewForm.get('rating')?.setValue(4);
-    component.reviewForm.get('comment')?.setValue('Nice show!');
     component.editingId.set(null);
 
     component.submitReview(new Event('submit'));
@@ -116,8 +114,6 @@ describe('Reviews', () => {
     component.editingId.set('1');
     component.rating.set(5);
     component.comment.set('Updated comment');
-    component.reviewForm.get('rating')?.setValue(5);
-    component.reviewForm.get('comment')?.setValue('Updated comment');
 
     component.submitReview(new Event('submit'));
 
@@ -134,8 +130,6 @@ describe('Reviews', () => {
   });
 
   it('should not dispatch if form is invalid', () => {
-    component.reviewForm.get('rating')?.setValue('');
-    component.reviewForm.get('comment')?.setValue('');
     component.rating.set(null);
     component.comment.set('');
     component.submitReview(new Event('submit'));

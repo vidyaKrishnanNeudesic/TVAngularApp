@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { 
+  HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TvShowService } from './TvShowService';
 import { environment } from '../../environments/environment';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('TvShowService', () => {
   let service: TvShowService;
@@ -9,8 +11,8 @@ describe('TvShowService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [TvShowService],
+      providers: [TvShowService,provideHttpClient(),
+        provideHttpClientTesting()],
     });
     service = TestBed.inject(TvShowService);
     httpMock = TestBed.inject(HttpTestingController);
