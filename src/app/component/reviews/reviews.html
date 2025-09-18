@@ -3,7 +3,7 @@
         <button mat-stroked-button color="primary" class="back-btn" (click)="goShowDetails()">&#8592; Back to Details</button>
 </div> -->
   <h3>Reviews</h3>
-  <form (submit)="submitReview($event)">
+  <form #reviewForm="ngForm" (submit)="submitReview($event)">
     <mat-form-field appearance="fill">
       <mat-label>Leave Rating</mat-label>
       <mat-select [value]="rating()" (selectionChange)="rating.set($event.value)" required>
@@ -16,14 +16,28 @@
       <mat-label>Comment</mat-label>
       <textarea
         matInput
-        #commentInput
-        [value]="comment()"
-        (input)="comment.set(commentInput.value)"
+        #commentInput="ngModel"
         required
+        minlength="3"
+      maxlength="50"
+      name="comment"
+      [(ngModel)]="commentValue"
+      (ngModelChange)="comment.set($event)"
       ></textarea>
+      <mat-error *ngIf="commentInput.invalid && (commentInput.dirty || commentInput.touched)">
+  <ng-container *ngIf="commentInput.errors?.['required']">
+    Comment is required.
+  </ng-container>
+  <ng-container *ngIf="commentInput.errors?.['minlength']">
+    Comment must be at least 3 characters.
+  </ng-container>
+  <ng-container *ngIf="commentInput.errors?.['maxlength']">
+    Comment cannot exceed 50 characters.
+  </ng-container>
+</mat-error>
     </mat-form-field>
     <input type="hidden" [value]="showId" name="showId" />
-    <button mat-raised-button color="primary" type="submit" [disabled]="!rating() || !comment()">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!rating() || !commentValue || commentValue.length < 3 || commentValue.length > 50">
       @if (editingId()) {
         Update Review
       } @else {

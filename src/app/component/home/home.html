@@ -6,7 +6,7 @@
         matInput
         type="text"
         [value]="searchText()"
-        (input)="searchText.set($event.target.value)"
+        (input)="updateSearchText($event.target.value)"
         (keyup)="onSearch()"
         placeholder="Search TV shows"
       />

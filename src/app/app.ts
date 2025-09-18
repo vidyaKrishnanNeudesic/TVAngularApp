@@ -28,16 +28,5 @@ import { Card } from './component/card/card';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('tv_show_explorer');
-  searchText = signal('');
-  searchResult = signal<any[]>([]);
 
-  constructor(private http: HttpClient) {}
-
-  onSearch() {
-    const url = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(this.searchText())}`;
-    this.http.get<any[]>(url).subscribe((result) => {
-      this.searchResult.set(result);
-    });
-  }
 }

@@ -26,7 +26,7 @@ import { Card } from '../card/card';
 export class HomeComponent {
   searchText = signal('');
   searchResult = signal<any[]>([]);
-  searching = signal<boolean>(true);
+  searching = signal<boolean>(false);
 
   constructor(
     private tvShowService: TvShowService,
@@ -53,5 +53,11 @@ export class HomeComponent {
         window.localStorage.setItem('searchText', this.searchText());
       });
     }
+  }
+
+  updateSearchText(text : string){
+    console.log(text);
+    this.searchText.set(text);
+    window.localStorage.setItem('searchText', this.searchText());
   }
 }
